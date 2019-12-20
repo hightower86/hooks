@@ -1,41 +1,24 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDom from 'react-dom';
 
-const App = () => (
-  <h1>
-    <Hook />
-  </h1>
-);
+const MyContext = React.createContext();
 
-const Hook = () => {
-  const [fSize, setFSize] = useState(2);
-  const [bgColor, setBgColor] = useState('gray');
-  const buttonStyle = {
-    fontSize: '2rem',
-    padding: '0.1rem 2rem 0.4rem 2rem',
-    margin: '0 0.5rem'
-  };
+const App = () => {
   return (
-    <div
-      style={{
-        height: '10rem',
-        width: '80%vw',
-        border: '1px black solid',
-        padding: '2rem',
-        backgroundColor: bgColor
-      }}
-    >
-      <button onClick={() => setFSize(s => s + 1)} style={buttonStyle}>
-        +
-      </button>
-      <button onClick={() => setFSize(s => s - 1)} style={buttonStyle}>
-        -
-      </button>
-      <button onClick={() => setBgColor('yellow')} style={buttonStyle}>
-        yellow
-      </button>
-      <h1 style={{ fontSize: `${fSize}rem` }}>Hello World</h1>
-    </div>
+    <MyContext.Provider value='Hello world'>
+      <Child />
+    </MyContext.Provider>
   );
 };
-ReactDOM.render(<App />, document.getElementById('root'));
+
+const Child = () => {
+  return (
+    <MyContext.Consumer>
+      {value => {
+        return <p>{value}</p>;
+      }}
+    </MyContext.Consumer>
+  );
+};
+
+ReactDom.render(<App />, document.getElementById('root'));
