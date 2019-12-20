@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDom from 'react-dom';
 
 const MyContext = React.createContext();
@@ -12,13 +12,18 @@ const App = () => {
 };
 
 const Child = () => {
-  return (
-    <MyContext.Consumer>
-      {value => {
-        return <p>{value}</p>;
-      }}
-    </MyContext.Consumer>
-  );
+  const value = useContext(MyContext);
+  return <p>{value}</p>;
 };
+
+// const Child = () => {
+//   return (
+//     <MyContext.Consumer>
+//       {value => {
+//         return <p>{value}</p>;
+//       }}
+//     </MyContext.Consumer>
+//   );
+// };
 
 ReactDom.render(<App />, document.getElementById('root'));
