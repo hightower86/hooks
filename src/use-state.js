@@ -38,4 +38,5 @@ const Hook = () => {
     </div>
   );
 };
+
 ReactDOM.render(<App />, document.getElementById('root'));
